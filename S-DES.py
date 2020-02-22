@@ -137,6 +137,9 @@ plaintext = []
 for i in range(8):
   plaintext.append(int(p1[i])) 
 
+print("")
+print("Generated Keys are :")
+
 #for p10 operation
 key1 = []
 for i in range(0,10):
@@ -219,5 +222,33 @@ ciphertext = [0,0,0,0,0,0,0,0]
 for i in range(8):
     a = ip[i]-1
     ciphertext[a] = returned_from_round2[i]
+print("")
+print("After Encryption :")
+print("ciphertext :",ciphertext)
+print("")
+#for Decryption
+#This is for round 3
+A = []
+for i in range(0,8):
+    A.append(ciphertext[ip[i]-1])
 
-print("ciphertext",ciphertext)
+first_round_of_decryption = round(A,K2)
+
+# for round 4
+swap1_2 = []
+swap2_2 = []
+for i in range(8):
+  if i < 4 : 
+    swap2_2.append(first_round_of_decryption[i])
+  else:
+    swap1_2.append(first_round_of_decryption[i])
+
+final_swap_2 = (swap1_2 + swap2_2)
+second_round_of_decryption = round(final_swap_2,K1)
+plainttext_2 = [0,0,0,0,0,0,0,0]
+for i in range(8):
+    a = ip[i]-1
+    plainttext_2[a] = second_round_of_decryption[i]
+
+print("After Decryption")
+print("plaintext : ",plainttext_2)
